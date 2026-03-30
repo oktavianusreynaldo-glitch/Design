@@ -1,20 +1,47 @@
 async function generate() {
-  const prompt = document.getElementById("prompt").value;
+  const promptInput = document.getElementById("prompt");
+  const resultImg = document.getElementById("result");
+  const loadingText = document.getElementById("loading");
+  const button = document.getElementById("generateBtn");
 
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
-    {
+  const prompt = promptInput.value.trim();
+
+  if (!prompt) {
+    alert("Masukkan deskripsi desain dulu");
+    return;
+  }
+
+  // UI state
+  loadingText.innerText = "⏳ Generating... (10-30 detik)";
+  button.disabled = true;
+  resultImg.src = "";
+
+  try {
+    const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
-        "Authorization": "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",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ inputs: prompt })
+      body: JSON.stringify({ prompt })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(errorText);
+      alert("Gagal generate:\n" + errorText);
+      return;
     }
-  );
 
-  const blob = await response.blob();
-  const imgUrl = URL.createObjectURL(blob);
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
 
-  document.getElementById("result").src = imgUrl;
+    resultImg.src = imageUrl;
+
+  } catch (error) {
+    console.error(error);
+    alert("Terjadi error koneksi");
+  }
+
+  loadingText.innerText = "";
+  button.disabled = false;
 }
