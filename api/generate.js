@@ -3,7 +3,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-2",
+      "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0",
       {
         method: "POST",
         headers: {
@@ -18,6 +18,7 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const text = await response.text();
+      console.error("HF ERROR:", text);
       return res.status(500).send(text);
     }
 
