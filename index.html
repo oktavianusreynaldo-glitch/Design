@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+  <meta charset="UTF-8">
   <title>AI T-Shirt Designer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Desain Baju AI</h1>
 
-  <input type="text" id="prompt" placeholder="Masukkan deskripsi desain..." />
-  <button onclick="generate()">Generate</button>
+  <div class="container">
+    <h1>👕 Desain Baju AI</h1>
 
-  <br><br>
-  <img id="result" width="300"/>
+    <input 
+      id="prompt" 
+      type="text" 
+      placeholder="contoh: kaos hitam desain naga Jepang"
+    />
+
+    <button onclick="generate()" id="generateBtn">
+      Generate
+    </button>
+
+    <p id="loading"></p>
+
+    <div class="preview">
+      <img src="tshirt.png" class="tshirt">
+      <img id="result" class="design">
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
