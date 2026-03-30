@@ -1,5 +1,47 @@
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
   text-align: center;
-  margin-top: 50px;
+}
+
+.container {
+  margin-top: 40px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: black;
+  color: white;
+  border: none;
+}
+
+button:disabled {
+  background: gray;
+}
+
+.preview {
+  position: relative;
+  margin-top: 30px;
+}
+
+.tshirt {
+  width: 300px;
+}
+
+.design {
+  position: absolute;
+  top: 80px;
+  left: 75px;
+  width: 150px;
 }
